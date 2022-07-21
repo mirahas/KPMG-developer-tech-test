@@ -1,29 +1,26 @@
 import { useEffect, useState, useRef } from 'react';
-import mapboxgl from 'mapbox-gl';
+import ReactMapGL, { Marker } from 'react-map-gl';
 import fetchLocations from '../api/_fetchLocations.jsx';
 
 export default function Map() {
-    mapboxgl.accessToken = 'pk.eyJ1IjoibWlyYXlocyIsImEiOiJja3k5eHcyeGYwMDN0Mm5yaTVhc2N5YXhsIn0.UYO7beAhrSrCTkEXJNhLMA';
 
     const mapContainer = useRef(null);
     const map = useRef(null);
-    const [lng, setLng] = useState(-70.9);
-    const [lat, setLat] = useState(42.35);
-    const [zoom, setZoom] = useState(9);
-    let companyLocations;
+    const [viewport, setViewport] = useState({
+        lat: 53,
+        long: 0,
+        height: '400',
+        width: '600',
+        zoom: 4.5
+    });
+    const [companyLocations, setCompanyLocations] = useState();
+
 
     useEffect(() => {
-        if (map.current) return; 
-        map.current = new mapboxgl.Map({
-            container: mapContainer.current,
-            style: 'mapbox://styles/mapbox/streets-v11',
-            center: [lng, lat],
-            zoom: zoom
-        });
-
         const loadData = async () => {
-            companyLocations = await fetchLocations();
-            console.log("locations data", companyLocations)
+            const locations = await fetchLocations();
+            setCompanyLocations(locations);
+            console.log("locations data", locations);
         }
         loadData();
 
@@ -31,9 +28,31 @@ export default function Map() {
 
     return (
         <>
-            <div>
-                <div ref={mapContainer} className="map-container" />
-            </div>
+            <ReactMapGL
+                initialViewState={{
+                    longitude: 0,
+                    latitude: 53,
+                    zoom: 4
+                }}
+                style={{ width: 600, height: 400 }}
+                mapboxAccessToken="pk.eyJ1IjoibWlyYXlocyIsImEiOiJja3k5eHcyeGYwMDN0Mm5yaTVhc2N5YXhsIn0.UYO7beAhrSrCTkEXJNhLMA"
+                mapStyle="mapbox://styles/mapbox/streets-v9"
+            >
+
+                {companyLocations &&
+                    companyLocations.map(company => (
+                        <Marker key={company.id}
+                            latitude={company.location.latitude}
+                            longitude={company.location.longitude}
+                        >
+                            <button className="map-marker">
+                                <img src="\marker.png"
+                                />
+                            </button>
+                        </Marker>
+                    ))
+                }
+            </ReactMapGL>
         </>
     );
 } 
