@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
-import fetchLocations from './api/_fetchLocations.jsx';
+import fetchLocations from '../api/_fetchLocations.jsx';
 
 export default function Map() {
     mapboxgl.accessToken = 'pk.eyJ1IjoibWlyYXlocyIsImEiOiJja3k5eHcyeGYwMDN0Mm5yaTVhc2N5YXhsIn0.UYO7beAhrSrCTkEXJNhLMA';
@@ -10,6 +10,7 @@ export default function Map() {
     const [lng, setLng] = useState(-70.9);
     const [lat, setLat] = useState(42.35);
     const [zoom, setZoom] = useState(9);
+    let companyLocations;
 
     useEffect(() => {
         if (map.current) return; 
@@ -19,9 +20,14 @@ export default function Map() {
             center: [lng, lat],
             zoom: zoom
         });
+
+        const loadData = async () => {
+            companyLocations = await fetchLocations();
+            console.log("locations data", companyLocations)
+        }
+        loadData();
+
     });
-
-
 
     return (
         <>

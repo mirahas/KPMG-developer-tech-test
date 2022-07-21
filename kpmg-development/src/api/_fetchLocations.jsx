@@ -1,5 +1,5 @@
 
-export async function fetchLocations() {
+export default async function fetchLocations() {
     const url = 'https://run.mocky.io/v3/7cb595ed-2882-4dc7-8179-d38d0b9c9d13';
     var data;
 
