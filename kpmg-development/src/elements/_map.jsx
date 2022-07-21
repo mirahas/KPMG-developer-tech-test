@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
+import fetchLocations from './api/_fetchLocations.jsx';
 
 export default function Map() {
     mapboxgl.accessToken = 'pk.eyJ1IjoibWlyYXlocyIsImEiOiJja3k5eHcyeGYwMDN0Mm5yaTVhc2N5YXhsIn0.UYO7beAhrSrCTkEXJNhLMA';
@@ -19,6 +20,8 @@ export default function Map() {
             zoom: zoom
         });
     });
+
+
 
     return (
         <>
