@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Filters from './_filters.jsx';
 
 export default function Table(props) {
 
@@ -7,6 +8,7 @@ export default function Table(props) {
 
     return (
         <>
+            <Filters data={props.data}/>
             <table>
                 <thead>
                 <tr>
