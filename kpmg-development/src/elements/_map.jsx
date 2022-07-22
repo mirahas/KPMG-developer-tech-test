@@ -51,11 +51,11 @@ export default function Map(props) {
                         anchor="top"
                     >
                         <div>
-                            <p> Company: {selectedCompany.company} </p>
-                            <p> Sector: {selectedCompany.sector} </p>
-                            <p> Address: {selectedCompany.address} </p>
-                            <p> Fees: {selectedCompany.fees.amount + " " + selectedCompany.fees.currency} </p>
-                            <p> Stock Symbol: {selectedCompany.stockSymbol} </p>
+                            <p> Company: {selectedCompany.company ? selectedCompany.company : "Not available"} </p>
+                            <p> Sector: {selectedCompany.sector ? selectedCompany.sector : "Not available" } </p>
+                            <p> Address: {selectedCompany.address ? selectedCompany.address : "Not available"} </p>
+                            <p> Fees: {selectedCompany.fees ? selectedCompany.fees.amount + " " + selectedCompany.fees.currency : "Not available"} </p>
+                            <p> Stock Symbol: {selectedCompany.stockSymbol ? selectedCompany.stockSymbol : "Not available"} </p>
 
                         </div>
                     </Popup>
