@@ -30,13 +30,11 @@ export default function Table(props) {
                                                 <>
                                                     {
                                                         property[1] && Object.entries(property[1]).map((additionalProperty, i) => (
-                                                            <p key={i}>
-                                                                {additionalProperty && additionalProperty.map((prop, i) => (
-                                                                    <>
+                                                                additionalProperty && additionalProperty.map((prop, i) => (
+                                                                    <p key={i}>
                                                                         {prop}
-                                                                    </>
-                                                                ))}
-                                                            </p>
+                                                                    </p>
+                                                                ))
                                                         ))
                                                         }
                                                 </>
