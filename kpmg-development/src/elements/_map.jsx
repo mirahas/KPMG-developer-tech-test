@@ -1,30 +1,24 @@
 import { useEffect, useState, useRef } from 'react';
-import ReactMapGL, { Marker } from 'react-map-gl';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import fetchLocations from '../api/_fetchLocations.jsx';
 
 export default function Map() {
 
-    const mapContainer = useRef(null);
-    const map = useRef(null);
-    const [viewport, setViewport] = useState({
-        lat: 53,
-        long: 0,
-        height: '400',
-        width: '600',
-        zoom: 4.5
-    });
     const [companyLocations, setCompanyLocations] = useState();
-
+    const [selectedCompany, setSelectedCompany] = useState(null);
 
     useEffect(() => {
+        var mount = true;
         const loadData = async () => {
             const locations = await fetchLocations();
-            setCompanyLocations(locations);
-            console.log("locations data", locations);
+
+            if (mount) {
+                setCompanyLocations(locations);
+            }
         }
         loadData();
-
-    });
+        return () => mount = false;
+    }, []);
 
     return (
         <>
@@ -34,7 +28,7 @@ export default function Map() {
                     latitude: 53,
                     zoom: 4
                 }}
-                style={{ width: 600, height: 400 }}
+                style={{ width: "100%", height: 600 }}
                 mapboxAccessToken="pk.eyJ1IjoibWlyYXlocyIsImEiOiJja3k5eHcyeGYwMDN0Mm5yaTVhc2N5YXhsIn0.UYO7beAhrSrCTkEXJNhLMA"
                 mapStyle="mapbox://styles/mapbox/streets-v9"
             >
@@ -45,13 +39,38 @@ export default function Map() {
                             latitude={company.location.latitude}
                             longitude={company.location.longitude}
                         >
-                            <button className="map-marker">
+
+                            <button className="map-marker"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    setSelectedCompany(company);
+                                    console.log("POPUP", company);
+
+                                }}
+                            >
                                 <img src="\marker.png"
                                 />
                             </button>
                         </Marker>
                     ))
                 }
+
+                {selectedCompany ? (
+                    <Popup
+                        latitude={selectedCompany.location.latitude ? selectedCompany.location.latitude : "0"}
+                        longitude={selectedCompany.location.longitude ? selectedCompany.location.longitude : "0"}
+                        onClose={() => { setSelectedCompany(null) }}
+                        closeButton={true}
+                        closeOnClick={false}
+                        anchor="top"
+                    >
+                        { console.log("popup company", selectedCompany)}
+                        <div>
+                            {selectedCompany.company}
+                        </div>
+                    </Popup>
+                ) : null}
+
             </ReactMapGL>
         </>
     );
