@@ -1,26 +1,30 @@
-.map-container {
+#main {
+    > h1 {
+        text-align: center;
+    }
+}
+
+.mapboxgl-map {
+    margin: 50px auto;
+    width: 90%;
     height: 400px;
 
     .map-marker {
         width: 20px;
         height: 20px;
-    }
-}
+        background: none;
+        border: none;
+        cursor: pointer;
 
-.map-marker {
-    background: none;
-    border: none;
-    cursor: pointer;
-
-    img {
-        width: 20px;
-        height: 20px;
+        img {
+            width: 20px;
+            height: 20px;
+        }
     }
 }
 
 .map-popup {
     width: 200px;
-    height: 200px;
     background-color: black;
     color: white;
     z-index: 10;
@@ -28,13 +32,20 @@
 
 table {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 8px;
     border-collapse: collapse;
-    width: 100%;
+    width: 90%;
+    margin: auto;
+    overflow-x: auto;
+
+    @media screen and (min-width: 700px) {
+        font-size: 14px;
+    }
 }
 
 table td, table th {
     border: 1px solid #ddd;
-    padding: 8px;
+    padding: 5px;
 }
 
 table tr:nth-child(even) {

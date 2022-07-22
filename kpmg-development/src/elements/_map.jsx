@@ -16,7 +16,7 @@ export default function Map(props) {
                     latitude: 53,
                     zoom: 4
                 }}
-                style={{ width: "100%", height: 600 }}
+                style={{ width: "90%", height: 500 }}
                 mapboxAccessToken="pk.eyJ1IjoibWlyYXlocyIsImEiOiJja3k5eHcyeGYwMDN0Mm5yaTVhc2N5YXhsIn0.UYO7beAhrSrCTkEXJNhLMA"
                 mapStyle="mapbox://styles/mapbox/streets-v9"
             >

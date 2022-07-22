@@ -24,7 +24,7 @@ function App() {
 
   return (
       <div id="main">
-          <h1>Company Location</h1 >
+          <h1>Company Locations</h1 >
           {data &&
             <>
                 <Map data={data} />
