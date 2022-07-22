@@ -64,9 +64,13 @@ export default function Map() {
                         closeOnClick={false}
                         anchor="top"
                     >
-                        { console.log("popup company", selectedCompany)}
                         <div>
-                            {selectedCompany.company}
+                            <p> Company: {selectedCompany.company} </p>
+                            <p> Sector: {selectedCompany.sector} </p>
+                            <p> Address: {selectedCompany.address} </p>
+                            <p> Fees: {selectedCompany.fees.amount + " " + selectedCompany.fees.currency} </p>
+                            <p> Stock Symbol: {selectedCompany.stockSymbol} </p>
+
                         </div>
                     </Popup>
                 ) : null}
