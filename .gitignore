@@ -7,3 +7,6 @@
 /.vs/slnx.sqlite
 /.vs/VSWorkspaceState.json
 /.vs/KPMG-developer-tech-test/config/applicationhost.config
+/.vs/slnx.sqlite-journal
+/kpmg-development/compilerconfig.json
+/kpmg-development/compilerconfig.json.defaults
