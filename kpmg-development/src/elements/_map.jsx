@@ -1,24 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import ReactMapGL, { Marker, Popup } from 'react-map-gl';
 import fetchLocations from '../api/_fetchLocations.jsx';
 
-export default function Map() {
+export default function Map(props) {
 
-    const [companyLocations, setCompanyLocations] = useState();
+    const [companyLocations, setCompanyLocations] = useState(props.data);
     const [selectedCompany, setSelectedCompany] = useState(null);
-
-    useEffect(() => {
-        var mount = true;
-        const loadData = async () => {
-            const locations = await fetchLocations();
-
-            if (mount) {
-                setCompanyLocations(locations);
-            }
-        }
-        loadData();
-        return () => mount = false;
-    }, []);
 
     return (
         <>
@@ -78,4 +66,8 @@ export default function Map() {
             </ReactMapGL>
         </>
     );
-} 
+}
+
+Map.propTypes = {
+    data: PropTypes.array.isRequired
+}
