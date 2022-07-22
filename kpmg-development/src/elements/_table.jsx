@@ -26,7 +26,7 @@ export default function Table(props) {
                                     <td key={i}>
                                         {property[1] && typeof property[1] === 'object' ? (
                                             <>
-                                                {console.log(property[1].amount) ? property[1].amount : (
+                                                {property[1].amount ? property[1].amount : (
                                                 <>
                                                     {
                                                         property[1] && Object.entries(property[1]).map((additionalProperty, i) => (
