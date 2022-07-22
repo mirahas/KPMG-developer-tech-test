@@ -20,15 +20,33 @@ export default function Table(props) {
                 </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        {data && data.map((item) => (
-                            item && Object.entries(item).map((property, index) => (
-                                <td key={index}>
-                                    {property[1] && typeof property[1] === 'object' ? property[1][1] : property[1]}
-                                </td>
-                            ))
+                        {data && data.map((item, i) => (
+                            <tr key={i}> {
+                                item && Object.entries(item).map((property, i) => (
+                                    <td key={i}>
+                                        {property[1] && typeof property[1] === 'object' ? (
+                                            <>
+                                                {console.log(property[1].amount) ? property[1].amount : (
+                                                <>
+                                                    {
+                                                        property[1] && Object.entries(property[1]).map((additionalProperty, i) => (
+                                                            <p key={i}>
+                                                                {additionalProperty && additionalProperty.map((prop, i) => (
+                                                                    <>
+                                                                        {prop}
+                                                                    </>
+                                                                ))}
+                                                            </p>
+                                                        ))
+                                                        }
+                                                </>
+                                                )}
+                                            </>
+                                        ): property[1]}
+                                    </td>
+                                ))
+                            } </tr>
                         ))}
-                    </tr>
                 </tbody>
             </table>
         </>
