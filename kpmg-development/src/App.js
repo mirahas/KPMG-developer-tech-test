@@ -14,7 +14,6 @@ function App() {
 
             if (mount) {
                 setData(locations);
-                console.log(locations);
             }
         }
         loadData();

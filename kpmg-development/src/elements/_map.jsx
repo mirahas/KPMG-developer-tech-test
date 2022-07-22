@@ -32,8 +32,6 @@ export default function Map(props) {
                                 onClick={(e) => {
                                     e.preventDefault();
                                     setSelectedCompany(company);
-                                    console.log("POPUP", company);
-
                                 }}
                             >
                                 <img src="\marker.png"
