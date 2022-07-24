@@ -7,8 +7,7 @@ This helps keep the code clean and readable. When I progressed through the task,
 coupled so I combined that into one piece of code. 
 
 Initially, I called the fetchLocations function in the map component. However, that meant when the page was loaded, 
-the map initially didn't have any markers. It Also meant that separate calls will need to be made from each component to get the data
-- causing repetitive code. Thus, I fetched the data in the App.js component and passed the data to both the table and map components through props.
+the map initially didn't have any markers. It Also meant that separate calls will need to be made from each component to get the data, causing repetitive code. Thus, I fetched the data in the App.js component and passed the data to both the table and map components through props.
 Also, I only rendered the map only when the data was available so the markers were on the map when rendered.
 
 ## Map Decisions
