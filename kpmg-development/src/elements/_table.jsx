@@ -63,6 +63,7 @@ export default function Table(props) {
 
     return (
         <>
+            <div id="filters"> 
             <select onChange={onChangeCompanyFilter}>
                 <option disabled selected>Filter by Sector</option>
                 <option value="notSelected">No Filter</option>
@@ -78,7 +79,7 @@ export default function Table(props) {
                 <option key="0" value="HighToLow">High to Low</option>
                 <option key="1" value="LowToHigh">Low to High</option>
             </select>
-
+            </div>
             <table>
                 <thead>
                 <tr>
