@@ -2,16 +2,10 @@ import { useState, useEffect } from 'react';
 
 export default function Filters(props) {
 
-    const [companyFilter, setCompanyFilter] = useState();
-    const [filter, setFilter] = useState();
+    const [companyOptions, setCompanyOptions] = useState(createCompanyOptions);
+    const [filteredCompanyOptions, setCompanyFilters] = useState();
 
-    function onChangeCompanyFilter(event) {
-        console.log(event.target.value);
-        setFilter(event.target.value);
-    }
-
-    useEffect(() => {
-        var mount = true;
+    function createCompanyOptions(filter) {
         var filterData = [];
 
         filterData = props.data.map((item) => {
@@ -24,27 +18,51 @@ export default function Filters(props) {
             return filterData.indexOf(ele) == pos;
         })
 
-        if (filter) {
-            const array = filteredArray.filter(category => category === filter)
-            setCompanyFilter(array);
-        } else {
-            setCompanyFilter(filteredArray);
+        console.log("company options", filteredArray);
+
+        return filteredArray;
+    }
+
+    function onChangeCompanyFilter(event) {
+
+        console.log("props.data", props.data);
+
+
+        const filter = event.target.value;
+        console.log(filter);
+
+        if (filter !== null && filter !== "") {
+            var array = props.data.filter(category => category.sector === filter )
+            console.log("after filtered by option", array);
+
+
+            setCompanyFilters(array);
         }
+    }
+
+    useEffect(() => {
+        var mount = true;
+       
 
         return () => { mount = false; }
 
-    }, [filter]);
+    }, [filteredCompanyOptions]);
 
     return (
         <>
             <select onChange={onChangeCompanyFilter}>
 
-                {companyFilter && companyFilter.map((item, i) => (
+                {companyOptions && !filteredCompanyOptions && companyOptions.map((item, i) => (
                     <>
                         <option key={i} value={item}>{item}</option>
                     </>
                 ))}
-          
+
+                {companyOptions && filteredCompanyOptions && filteredCompanyOptions.map((item, i) => (
+                    <>
+                        <option key={i} value={item}>{item}</option>
+                    </>
+                ))}
             </select>
 
            
